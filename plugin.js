@@ -1,8 +1,149 @@
 // src/plugin.tsx
 import { ROUTES_AREA, SIDEBAR_NAV_AREA, THEMES_AREA } from "@hermes/plugin-sdk";
 
+// src/dashboard.tsx
+import { Button, host, useValue } from "@hermes/plugin-sdk";
+import { useEffect, useState } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
+var AVATAR_COLORS = ["#5B6BFF", "#7C4DFF", "#00A86B", "#2ED3A1", "#FF6B6B", "#FF9F43", "#8E5CF7", "#00A6D6"];
+function shortModel(value) {
+  if (!value) {
+    return "\uBAA8\uB378 \uBBF8\uC124\uC815";
+  }
+  const tail = value.split("/").pop() || value;
+  return tail.replace(/:free$/, "").replace(/:.*$/, "").slice(0, 24);
+}
+function Dashboard() {
+  const profile = useValue(host.state.profile) || "default";
+  const [profiles, setProfiles] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  const [model, setModel] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const [profileResult, roomResult, modelResult] = await Promise.all([
+          host.profiles.list(),
+          host.request("groups.list", { profile, limit: 100 }).catch(() => ({ rooms: [] })),
+          host.request("model.options", { refresh: false, explicit_only: true }).catch(() => null)
+        ]);
+        if (cancelled) {
+          return;
+        }
+        setProfiles(profileResult?.profiles || []);
+        setRooms(roomResult?.rooms || []);
+        setModel({ model: modelResult?.model, provider: modelResult?.provider });
+      } catch (e) {
+        if (!cancelled) {
+          setError(e instanceof Error ? e.message : String(e));
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [profile]);
+  const stats = [
+    { label: "\uBD07 \uD504\uB85C\uD544", value: profiles.length, hint: "\uC5F0\uACB0\uB41C \uBD07" },
+    { label: "\uADF8\uB8F9 \uB300\uD654", value: rooms.length, hint: "\uD65C\uC131 \uBC29" },
+    { label: "\uD604\uC7AC \uBAA8\uB378", value: shortModel(model.model), hint: model.provider || "\uAE30\uBCF8\uAC12" }
+  ];
+  return /* @__PURE__ */ jsxs("div", { className: "mx-auto grid w-full max-w-6xl gap-5 p-8", children: [
+    /* @__PURE__ */ jsxs("header", { className: "flex flex-wrap items-end justify-between gap-3", children: [
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx("p", { className: "text-xs font-semibold uppercase tracking-wider text-muted-foreground", children: "Nazarick cockpit" }),
+        /* @__PURE__ */ jsx("h1", { className: "mt-1 text-2xl font-bold tracking-tight", children: "\uB300\uC2DC\uBCF4\uB4DC" }),
+        /* @__PURE__ */ jsxs("p", { className: "mt-1 text-sm text-muted-foreground", children: [
+          "\uBC31\uC5D4\uB4DC\uB294 \uADF8\uB300\uB85C, \uD654\uBA74\uB9CC \uB0B4 \uCDE8\uD5A5\uC73C\uB85C. \uD604\uC7AC \uD504\uB85C\uD544: ",
+          /* @__PURE__ */ jsx("span", { className: "font-semibold text-foreground", children: profile })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "flex gap-2", children: [
+        /* @__PURE__ */ jsx(Button, { onClick: () => host.navigate("/hermes-ui-collection"), children: "UI \uD14C\uB9C8" }),
+        /* @__PURE__ */ jsx(Button, { variant: "ghost", onClick: () => host.navigate("/all-bots-model"), children: "\uBAA8\uB4E0 \uBD07 \uBAA8\uB378" })
+      ] })
+    ] }),
+    error ? /* @__PURE__ */ jsx("p", { className: "rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive", children: error }) : null,
+    /* @__PURE__ */ jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: stats.map((stat) => /* @__PURE__ */ jsxs("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
+      /* @__PURE__ */ jsx("p", { className: "text-xs font-semibold text-muted-foreground", children: stat.label }),
+      /* @__PURE__ */ jsx("p", { className: "mt-2 truncate text-2xl font-extrabold tracking-tight", children: stat.value }),
+      /* @__PURE__ */ jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: stat.hint })
+    ] }, stat.label)) }),
+    /* @__PURE__ */ jsxs("div", { className: "grid gap-5 lg:grid-cols-[1.15fr_.85fr]", children: [
+      /* @__PURE__ */ jsxs("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
+        /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("h2", { className: "text-sm font-bold", children: "\uBD07" }),
+            /* @__PURE__ */ jsx("p", { className: "mt-0.5 text-xs text-muted-foreground", children: "\uD504\uB85C\uD544\uBCC4 \uD604\uC7AC \uBAA8\uB378" })
+          ] }),
+          /* @__PURE__ */ jsx(Button, { variant: "ghost", onClick: () => host.navigate("/all-bots-model"), children: "\uC804\uCCB4 \uBCF4\uAE30" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "mt-3 grid gap-1", children: [
+          loading ? /* @__PURE__ */ jsx("p", { className: "py-6 text-center text-sm text-muted-foreground", children: "\uBD88\uB7EC\uC624\uB294 \uC911\u2026" }) : null,
+          profiles.slice(0, 8).map((row, index) => /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-muted/60", children: [
+            /* @__PURE__ */ jsx(
+              "span",
+              {
+                className: "grid h-8 w-8 place-items-center rounded-[10px] text-[11px] font-extrabold text-white",
+                style: { background: AVATAR_COLORS[index % AVATAR_COLORS.length] },
+                children: (row.display_name || row.name || "?").trim().charAt(0)
+              }
+            ),
+            /* @__PURE__ */ jsxs("div", { className: "min-w-0", children: [
+              /* @__PURE__ */ jsx("p", { className: "truncate text-sm font-semibold", children: row.display_name || row.name }),
+              /* @__PURE__ */ jsx("p", { className: "truncate text-[11px] text-muted-foreground", children: row.name })
+            ] }),
+            /* @__PURE__ */ jsxs("span", { className: "ml-auto shrink-0 rounded-full bg-muted px-2.5 py-1 text-[11px] font-semibold text-muted-foreground", children: [
+              shortModel(row.model),
+              row.provider ? ` \xB7 ${row.provider}` : ""
+            ] })
+          ] }, row.name))
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "grid gap-5", children: [
+        /* @__PURE__ */ jsxs("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
+          /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between", children: [
+            /* @__PURE__ */ jsxs("div", { children: [
+              /* @__PURE__ */ jsx("h2", { className: "text-sm font-bold", children: "\uADF8\uB8F9 \uB300\uD654" }),
+              /* @__PURE__ */ jsx("p", { className: "mt-0.5 text-xs text-muted-foreground", children: "\uD638\uC2A4\uD2F0\uB4DC \uB8F8" })
+            ] }),
+            /* @__PURE__ */ jsx("span", { className: "rounded-full bg-muted px-2.5 py-1 text-[11px] font-semibold text-muted-foreground", children: rooms.length })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "mt-3 grid gap-1", children: [
+            rooms.slice(0, 5).map((room) => /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 rounded-xl px-2 py-2 transition-colors hover:bg-muted/60", children: [
+              /* @__PURE__ */ jsx("span", { className: "h-2 w-2 rounded-full bg-primary" }),
+              /* @__PURE__ */ jsx("span", { className: "min-w-0 truncate text-sm font-medium", children: room.name }),
+              /* @__PURE__ */ jsxs("span", { className: "ml-auto text-[11px] text-muted-foreground", children: [
+                room.members?.length || 0,
+                "\uBA85"
+              ] })
+            ] }, room.room_id)),
+            !loading && rooms.length === 0 ? /* @__PURE__ */ jsx("p", { className: "py-4 text-sm text-muted-foreground", children: "\uADF8\uB8F9\uC774 \uC5C6\uC2B5\uB2C8\uB2E4." }) : null
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
+          /* @__PURE__ */ jsx("h2", { className: "text-sm font-bold", children: "\uBE60\uB978 \uC791\uC5C5" }),
+          /* @__PURE__ */ jsxs("div", { className: "mt-3 grid gap-2", children: [
+            /* @__PURE__ */ jsx(Button, { className: "justify-start", variant: "ghost", onClick: () => host.navigate("/hermes-ui-collection"), children: "\uD14C\uB9C8 \uBC14\uAFB8\uAE30" }),
+            /* @__PURE__ */ jsx(Button, { className: "justify-start", variant: "ghost", onClick: () => host.navigate("/all-bots-model"), children: "\uBAA8\uB4E0 \uBD07 \uBAA8\uB378 \uBCC0\uACBD" }),
+            /* @__PURE__ */ jsx(Button, { className: "justify-start", variant: "ghost", onClick: () => host.navigate("/kanban"), children: "\uCE78\uBC18 \uC5F4\uAE30" })
+          ] })
+        ] })
+      ] })
+    ] })
+  ] });
+}
+
 // src/theme-gallery.tsx
-import { Button, useTheme } from "@hermes/plugin-sdk";
+import { Button as Button2, useTheme } from "@hermes/plugin-sdk";
 
 // src/themes.ts
 var tossTypography = {
@@ -370,10 +511,10 @@ var APPLE = {
 var OUR_THEMES = [TOSS, NAVER, APPLE];
 
 // src/theme-gallery.tsx
-import { jsx, jsxs } from "react/jsx-runtime";
+import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var SWATCH_KEYS = ["background", "primary", "card", "foreground"];
 function Swatches({ theme }) {
-  return /* @__PURE__ */ jsx("div", { className: "flex items-center gap-2", children: SWATCH_KEYS.map((key) => /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsx2("div", { className: "flex items-center gap-2", children: SWATCH_KEYS.map((key) => /* @__PURE__ */ jsx2(
     "span",
     {
       title: key,
@@ -384,19 +525,19 @@ function Swatches({ theme }) {
   )) });
 }
 function ThemeGallery() {
-  const { availableThemes, themeName, setTheme } = useTheme();
-  const themes = OUR_THEMES.map((theme) => availableThemes.find((item) => item.name === theme.name) ?? theme);
-  return /* @__PURE__ */ jsxs("div", { className: "mx-auto grid w-full max-w-5xl gap-6 p-8", children: [
-    /* @__PURE__ */ jsxs("header", { children: [
-      /* @__PURE__ */ jsx("h1", { className: "text-2xl font-bold tracking-tight", children: "UI \uD14C\uB9C8" }),
-      /* @__PURE__ */ jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: "\uBC31\uC5D4\uB4DC\uB294 \uADF8\uB300\uB85C \uB450\uACE0 \uD654\uBA74 \uC2A4\uD0C0\uC77C\uB9CC \uBC14\uAFC9\uB2C8\uB2E4. \uC124\uC815 \u2192 \uBAA8\uC591\uC5D0\uC11C\uB3C4 \uACE0\uB97C \uC218 \uC788\uC2B5\uB2C8\uB2E4." })
+  const { themeName, setTheme } = useTheme();
+  const themes = OUR_THEMES;
+  return /* @__PURE__ */ jsxs2("div", { className: "mx-auto grid w-full max-w-5xl gap-6 p-8", children: [
+    /* @__PURE__ */ jsxs2("header", { children: [
+      /* @__PURE__ */ jsx2("h1", { className: "text-2xl font-bold tracking-tight", children: "UI \uD14C\uB9C8" }),
+      /* @__PURE__ */ jsx2("p", { className: "mt-1 text-sm text-muted-foreground", children: "\uBC31\uC5D4\uB4DC\uB294 \uADF8\uB300\uB85C \uB450\uACE0 \uD654\uBA74 \uC2A4\uD0C0\uC77C\uB9CC \uBC14\uAFC9\uB2C8\uB2E4. \uC124\uC815 \u2192 \uBAA8\uC591\uC5D0\uC11C\uB3C4 \uACE0\uB97C \uC218 \uC788\uC2B5\uB2C8\uB2E4." })
     ] }),
-    /* @__PURE__ */ jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3", children: themes.map((theme) => /* @__PURE__ */ jsxs("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
-      /* @__PURE__ */ jsx(Swatches, { theme }),
-      /* @__PURE__ */ jsx("h2", { className: "mt-4 text-base font-semibold", children: theme.label }),
-      /* @__PURE__ */ jsx("p", { className: "mt-1 min-h-10 text-sm text-muted-foreground", children: theme.description }),
-      /* @__PURE__ */ jsx(
-        Button,
+    /* @__PURE__ */ jsx2("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3", children: themes.map((theme) => /* @__PURE__ */ jsxs2("section", { "data-slot": "card", className: "rounded-2xl border border-border bg-card p-5 shadow-sm", children: [
+      /* @__PURE__ */ jsx2(Swatches, { theme }),
+      /* @__PURE__ */ jsx2("h2", { className: "mt-4 text-base font-semibold", children: theme.label }),
+      /* @__PURE__ */ jsx2("p", { className: "mt-1 min-h-10 text-sm text-muted-foreground", children: theme.description }),
+      /* @__PURE__ */ jsx2(
+        Button2,
         {
           className: "mt-4 w-full",
           disabled: themeName === theme.name,
@@ -405,23 +546,24 @@ function ThemeGallery() {
         }
       )
     ] }, theme.name)) }),
-    /* @__PURE__ */ jsxs("p", { className: "text-xs text-muted-foreground", children: [
+    /* @__PURE__ */ jsxs2("p", { className: "text-xs text-muted-foreground", children: [
       "\uD14C\uB9C8\uB97C \uCD94\uAC00\uD558\uB824\uBA74 ",
-      /* @__PURE__ */ jsx("code", { className: "font-mono", children: "src/themes.ts" }),
+      /* @__PURE__ */ jsx2("code", { className: "font-mono", children: "src/themes.ts" }),
       "\uC758",
       " ",
-      /* @__PURE__ */ jsx("code", { className: "font-mono", children: "OUR_THEMES" }),
+      /* @__PURE__ */ jsx2("code", { className: "font-mono", children: "OUR_THEMES" }),
       "\uC5D0 ",
-      /* @__PURE__ */ jsx("code", { className: "font-mono", children: "DesktopTheme" }),
+      /* @__PURE__ */ jsx2("code", { className: "font-mono", children: "DesktopTheme" }),
       " \uAC1D\uCCB4\uB97C \uD558\uB098 \uB354 \uB4F1\uB85D\uD558\uBA74 \uB429\uB2C8\uB2E4."
     ] })
   ] });
 }
 
 // src/plugin.tsx
-import { jsx as jsx2 } from "react/jsx-runtime";
+import { jsx as jsx3 } from "react/jsx-runtime";
 var ID = "hermes-ui-collection";
 var PATH = "/hermes-ui-collection";
+var DASHBOARD_PATH = "/hermes-ui-dashboard";
 var plugin_default = {
   id: ID,
   name: "Hermes UI Collection",
@@ -435,10 +577,22 @@ var plugin_default = {
         data: theme
       })),
       {
+        id: "dashboard",
+        area: ROUTES_AREA,
+        data: { path: DASHBOARD_PATH },
+        render: () => /* @__PURE__ */ jsx3(Dashboard, {})
+      },
+      {
         id: "gallery",
         area: ROUTES_AREA,
         data: { path: PATH },
-        render: () => /* @__PURE__ */ jsx2(ThemeGallery, {})
+        render: () => /* @__PURE__ */ jsx3(ThemeGallery, {})
+      },
+      {
+        id: "dashboard-nav",
+        area: SIDEBAR_NAV_AREA,
+        order: 63,
+        data: { path: DASHBOARD_PATH, label: "\uB300\uC2DC\uBCF4\uB4DC", codicon: "dashboard" }
       },
       {
         id: "nav",

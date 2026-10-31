@@ -18,6 +18,15 @@ Hermes Desktop을 위한 **UI 전용 테마 플러그인**입니다. 백엔드·
 
 ## 설치
 
+가장 빠른 이식(플러그인 파일 하나만):
+
+```bash
+mkdir -p "$HOME/.hermes/desktop-plugins/hermes-ui-collection" \
+  && curl -fsSL https://raw.githubusercontent.com/hushmind3/hermes-ui-collection/main/plugin.js \
+     -o "$HOME/.hermes/desktop-plugins/hermes-ui-collection/plugin.js"
+```
+
+
 디스크 플러그인은 빌드가 필요 없습니다. 아래 경로에 파일을 두면 앱이 바로 로드하고, 저장할 때마다 핫리로드합니다.
 
 ```bash
@@ -42,6 +51,9 @@ npm run watch    # 저장할 때마다 빌드
 그다음 Hermes Desktop을 열고 **설정 → 모양**에서 테마를 선택하세요.
 
 ## 구조
+
+- `대시보드` 페이지: 봇·그룹·모델 현황과 빠른 작업
+- `UI 테마` 페이지: Toss / Naver / Apple 미리보기·적용
 
 ```
 plugin.js      # 테마 3개 + UI 테마 페이지 + 사이드바 항목

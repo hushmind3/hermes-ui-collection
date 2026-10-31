@@ -12,6 +12,15 @@ declare module '@hermes/plugin-sdk' {
   export const SIDEBAR_NAV_AREA: string
   export const THEMES_AREA: string
 
+  export const host: {
+    state: { profile: { get(): string } }
+    profiles: { list(): Promise<{ profiles?: unknown[] }> }
+    request(method: string, params?: Record<string, unknown>): Promise<any>
+    navigate(path: string): void
+  }
+
+  export function useValue<T>(atom: { get(): T }): T
+
   export const Button: ComponentType<{
     children?: ReactNode
     className?: string

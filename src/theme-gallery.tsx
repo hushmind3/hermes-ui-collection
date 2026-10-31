@@ -20,8 +20,9 @@ function Swatches({ theme }: { theme: (typeof OUR_THEMES)[number] }) {
 }
 
 export function ThemeGallery() {
-  const { availableThemes, themeName, setTheme } = useTheme()
-  const themes = OUR_THEMES.map(theme => availableThemes.find(item => item.name === theme.name) ?? theme)
+  const { themeName, setTheme } = useTheme()
+  // The registry's summaries can omit palette data; preview from our frozen themes.
+  const themes = OUR_THEMES
 
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-6 p-8">
