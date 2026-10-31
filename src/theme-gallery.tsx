@@ -51,9 +51,7 @@ export function ThemeGallery() {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        테마를 추가하려면 <code className="font-mono">src/themes.ts</code>의{' '}
-        <code className="font-mono">OUR_THEMES</code>에 <code className="font-mono">DesktopTheme</code> 객체를 하나 더
-        등록하면 됩니다.
+        테마를 바꾸면 사이드바, 탭, 버튼, 입력창, 글꼴과 아이콘까지 함께 바뀝니다. 앱을 다시 시작할 필요는 없습니다.
       </p>
     </div>
   )

@@ -1,4 +1,4 @@
 name: hermes-ui-collection
-version: 0.1.0
-description: "Tide / Mint / Frost themes and a dashboard for Hermes Desktop. Desktop-only: no agent tools or hooks."
+version: 0.2.0
+description: "Tide / Mint / Frost: whole-window Desktop themes (chrome, tabs, composer, type, icons). Desktop-only: no agent tools or hooks."
 author: "hushmind3"

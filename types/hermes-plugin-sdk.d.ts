@@ -11,6 +11,7 @@ declare module '@hermes/plugin-sdk' {
   export const ROUTES_AREA: string
   export const SIDEBAR_NAV_AREA: string
   export const THEMES_AREA: string
+  export const TITLEBAR_AREAS: { left: string; center: string; right: string }
 
   export const host: {
     state: { profile: { get(): string } }

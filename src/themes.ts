@@ -1,36 +1,142 @@
 import type { DesktopTheme } from '@hermes/plugin-sdk'
 
+import { buildChrome } from './chrome'
+
+/* Three typefaces, three personalities. Each theme loads a body face and a
+   display face in one stylesheet request. */
 const tideTypography = {
-  fontSans: 'Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
-  fontUrl: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css',
+  fontSans: '"Gothic A1", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
+  fontUrl:
+    'https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap',
   fontMono: 'ui-monospace, SFMono-Regular, Menlo, monospace',
   baseSize: '14px',
   lineHeight: '1.5',
-  letterSpacing: '-0.01em'
+  letterSpacing: '-0.005em'
 }
 
 const mintTypography = {
-  fontSans: '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif',
-  fontUrl: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap',
+  fontSans: '"IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif',
+  fontUrl:
+    'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=DM+Serif+Display&display=swap',
   fontMono: 'ui-monospace, SFMono-Regular, Menlo, monospace',
   baseSize: '14px',
   lineHeight: '1.5',
-  letterSpacing: '-0.01em'
+  letterSpacing: '0em'
 }
 
 const frostTypography = {
-  fontSans: 'Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Apple SD Gothic Neo", sans-serif',
-  fontUrl: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+  fontSans: 'Sunflower, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
+  fontUrl:
+    'https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&family=Inter+Tight:wght@200;300;800&display=swap',
   fontMono: 'ui-monospace, SFMono-Regular, Menlo, monospace',
   baseSize: '14px',
   lineHeight: '1.5',
-  letterSpacing: '-0.015em'
+  letterSpacing: '0.002em'
 }
+
+/* ── Tide ───────────────────────────────────────────────────────────────── */
+
+const tideChrome = buildChrome(
+  {
+    name: 'tide',
+    accent: '#3182F6',
+    accentDeep: '#1B64DA',
+    accentSoft: '#E8F2FF',
+    page: '#F4F5F8',
+    side: '#EDF2FA',
+    line: '#DCE5F2',
+    ink: '#16202E',
+    text2: '#4E5968',
+    text3: '#8B95A1',
+    hover: '#E2EBF9',
+    chip: '#DEEAFC',
+    activeBg: '#3182F6',
+    activeInk: '#FFFFFF',
+    activeShadow: '0 4px 14px -3px rgba(49, 130, 246, .55)',
+    tabActiveBg: '#FFFFFF',
+    tabActiveInk: '#1B64DA',
+    tabShadow: '0 1px 2px rgba(20, 50, 90, .14), 0 0 0 1px rgba(20, 50, 90, .04)',
+    tabStrip: '#E7EEF9',
+    itemRadius: 9,
+    cardRadius: 20,
+    btnRadius: 12,
+    inputRadius: 12,
+    composerRadius: 24,
+    composerShadow: '0 10px 30px -10px rgba(20, 50, 90, .22), 0 1px 2px rgba(20, 50, 90, .06)',
+    glow: 'rgba(49, 130, 246, .10)',
+    displayFamily: 'Space Grotesk',
+    displayWeight: 700,
+    displayTracking: '-0.055em',
+    wordmarkGradient: 'linear-gradient(112deg, #1B64DA 0%, #4C9BFF 45%, #0A2A66 100%)',
+    wordmarkShadow: '0 14px 34px rgba(49, 130, 246, .28)',
+    extra: R => `
+${R} [data-slot="pane-tab"] { letter-spacing: -0.01em !important; }
+`,
+    lightExtra: R => `
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"] {
+  border-radius: 999px !important;
+  background-image: linear-gradient(180deg, #5AA2FF 0%, #3182F6 58%, #2272EB 100%) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 6px 18px -5px rgba(49, 130, 246, .60) !important;
+}
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"]:hover {
+  background-image: linear-gradient(180deg, #6DAEFF 0%, #3B8CF8 58%, #2A7AEF 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .44), 0 12px 28px -6px rgba(49, 130, 246, .66) !important;
+  transform: translateY(-1px);
+}
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"],
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"] {
+  background: #fff !important;
+  border: 1px solid var(--t-line) !important;
+  box-shadow: 0 1px 2px rgba(20, 50, 90, .06) !important;
+}
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"]:hover,
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"]:hover {
+  border-color: #BFD4F2 !important;
+  background: #F7FAFF !important;
+}
+`,
+    darkExtra: R => `
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"] {
+  border-radius: 999px !important;
+  background-image: linear-gradient(180deg, #5FA9FF 0%, #3182F6 100%) !important;
+  color: #06101E !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 6px 20px -6px rgba(49, 130, 246, .70) !important;
+}
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 12px 30px -8px rgba(49, 130, 246, .80) !important;
+  transform: translateY(-1px);
+}
+`
+  },
+  {
+    accent: '#4C9BFF',
+    accentDeep: '#8CC2FF',
+    accentSoft: 'rgba(76, 155, 255, .16)',
+    page: '#0F1115',
+    side: '#151A22',
+    line: '#262E3A',
+    ink: '#F2F4F6',
+    text2: '#B6BEC9',
+    text3: '#8A94A2',
+    hover: '#1D2430',
+    chip: '#1B2532',
+    activeBg: '#2E6FD6',
+    activeInk: '#FFFFFF',
+    activeShadow: '0 4px 16px -4px rgba(49, 130, 246, .55)',
+    tabActiveBg: '#1D2530',
+    tabActiveInk: '#7FB4FF',
+    tabShadow: 'inset 0 0 0 1px #2A3542',
+    tabStrip: '#12161C',
+    composerShadow: '0 18px 50px -16px rgba(0, 0, 0, .75), 0 1px 2px rgba(0, 0, 0, .5)',
+    glow: 'rgba(49, 130, 246, .12)'
+  }
+)
 
 export const TIDE: DesktopTheme = {
   name: 'tide',
   label: 'Tide',
-  description: '밝은 회색 배경과 코발트 블루, 둥근 카드와 부드러운 그림자.',
+  description: '쿨한 블루와 넉넉한 곡률. 카드가 떠 있고 사이드바가 또렷한 테마.',
   colors: {
     background: '#F4F5F8',
     foreground: '#1A1F29',
@@ -52,8 +158,8 @@ export const TIDE: DesktopTheme = {
     midground: '#2272EB',
     destructive: '#F04452',
     destructiveForeground: '#FFFFFF',
-    sidebarBackground: '#FBFCFD',
-    sidebarBorder: '#E5E8EB',
+    sidebarBackground: '#EDF2FA',
+    sidebarBorder: '#DCE5F2',
     userBubble: '#E8F3FF',
     userBubbleBorder: '#D6E7FF'
   },
@@ -78,131 +184,173 @@ export const TIDE: DesktopTheme = {
     midground: '#4C9BFF',
     destructive: '#FF6B6B',
     destructiveForeground: '#1A0B0B',
-    sidebarBackground: '#141518',
-    sidebarBorder: '#2A2D34',
+    sidebarBackground: '#151A22',
+    sidebarBorder: '#262E3A',
     userBubble: '#1E2A3A',
     userBubbleBorder: '#2E4360'
   },
   typography: tideTypography,
-  customCSS: `
-:root[data-hermes-theme="tide"] {
-  --radius: 16px;
-  --ui-bg-chrome: #F4F5F8;
-  --ui-bg-sidebar: #FFFFFF;
-  --ui-bg-editor: #FFFFFF;
-  --ui-bg-elevated: #FFFFFF;
-  --ui-bg-card: #FFFFFF;
-  --ui-bg-input: #FFFFFF;
-  --ui-bg-primary: #FFFFFF;
-  --ui-bg-secondary: #F4F5F8;
-  --ui-bg-tertiary: #EDEFF2;
-  --ui-bg-quaternary: #E8EBEF;
-  --ui-bg-quinary: #E1E5EA;
-  --ui-text-primary: #1A1F29;
-  --ui-text-secondary: #4E5968;
-  --ui-text-tertiary: #8B95A1;
-  --ui-text-quaternary: #B0B8C1;
-  --ui-stroke-primary: #D1D6DB;
-  --ui-stroke-secondary: #E5E8EB;
-  --ui-stroke-tertiary: #EDEFF2;
-  --ui-stroke-quaternary: #F2F4F6;
-  --ui-accent: #3182F6;
-  --ui-success: #00B96B;
-  --ui-control-hover-background: #F2F4F6;
-  --chrome-action-hover: #F2F4F6;
+  customCSS: tideChrome
 }
-:root[data-hermes-theme="tide"] [data-slot="button"] {
-  border-radius: 12px;
-  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease, background-color .16s ease;
+
+/* ── Mint ───────────────────────────────────────────────────────────────── */
+
+const mintChrome = buildChrome(
+  {
+    name: 'mint',
+    accent: '#03C75A',
+    accentDeep: '#04783B',
+    accentSoft: '#E4F8ED',
+    page: '#F6FBF8',
+    side: '#EFF9F3',
+    line: '#D5EBDD',
+    ink: '#15231A',
+    text2: '#4B5A50',
+    text3: '#85938A',
+    hover: '#E2F5EA',
+    chip: '#DCF3E4',
+    activeBg: '#FFFFFF',
+    activeInk: '#04783B',
+    activeShadow: 'inset 3px 0 0 #03C75A, 0 1px 3px rgba(4, 80, 32, .12)',
+    tabActiveBg: 'transparent',
+    tabActiveInk: '#03A94D',
+    tabShadow: 'inset 0 -2px 0 #03C75A',
+    tabStrip: 'transparent',
+    itemRadius: 6,
+    cardRadius: 12,
+    btnRadius: 7,
+    inputRadius: 6,
+    composerRadius: 10,
+    composerShadow: '0 1px 0 rgba(255, 255, 255, .6) inset, 0 8px 24px -14px rgba(4, 100, 50, .35)',
+    glow: 'rgba(3, 199, 90, .08)',
+    displayFamily: 'DM Serif Display',
+    displayWeight: 400,
+    displayTracking: '-0.02em',
+    wordmarkGradient: 'linear-gradient(112deg, #04783B 0%, #03C75A 50%, #0A5C34 100%)',
+    wordmarkShadow: '0 14px 34px rgba(3, 199, 90, .24)',
+    extra: R => `
+${R} [data-slot="pane-tab"] {
+  height: 28px !important;
+  margin: 0 2px !important;
+  padding-inline: 8px !important;
+  border-radius: 0 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"] {
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 58%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .30), 0 2px 6px rgba(49, 130, 246, .24);
+${R} [data-slot="pane-tab"][data-active="true"] {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: inset 0 -2px 0 var(--t-accent) !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:hover {
-  filter: brightness(1.04);
+${R} [data-slot="pane-tab"][data-active="false"] { color: var(--t-text-3) !important; }
+${R} [data-slot="sidebar-menu-item"] > button > .codicon { border-radius: 4px !important; }
+`,
+    lightExtra: R => `
+${R}[data-hermes-mode="light"] [data-tree-group]:not(:has([data-slot="sidebar"])) {
+  background-image: radial-gradient(circle, rgba(3, 199, 90, .15) 1px, transparent 1.4px) !important;
+  background-size: 18px 18px !important;
+  background-position: -9px -9px !important;
+  background-repeat: repeat !important;
+}
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"] {
+  background-image: none !important;
+  background-color: #03C75A !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26), 0 2px 0 #039F48 !important;
+}
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"]:hover {
+  background-color: #05B553 !important;
   transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 8px 20px rgba(49, 130, 246, .30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 3px 0 #039F48, 0 8px 18px -6px rgba(3, 199, 90, .45) !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:active {
-  transform: translateY(0);
-  filter: brightness(.98);
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"]:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 60, 25, .25) !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="secondary"],
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="outline"] {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 1px 2px rgba(25, 31, 40, .04);
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"],
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"] {
+  background: #F3FBF6 !important;
+  border: 1px solid #BCE6CC !important;
+  color: #04783B !important;
+  box-shadow: none !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="card"] {
-  border-radius: 20px;
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #FBFCFD 100%);
-  box-shadow:
-    rgba(255, 255, 255, .96) 0 0 0 .75px inset,
-    rgba(7, 25, 76, .04) 0 0 0 .75px,
-    rgba(0, 0, 0, .08) 0 0 0 .5px,
-    rgba(0, 0, 0, .04) 0 1px 1px;
-  transition: transform .18s ease, box-shadow .18s ease;
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"]:hover,
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"]:hover {
+  background: #E4F8ED !important;
+  border-color: #8EDBAE !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="card"]:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    rgba(255, 255, 255, .96) 0 0 0 .75px inset,
-    rgba(7, 25, 76, .06) 0 0 0 .75px,
-    rgba(0, 0, 0, .10) 0 0 0 .5px,
-    rgba(0, 29, 58, .12) 0 8px 24px -6px;
+${R}[data-hermes-mode="light"] [data-slot="composer-surface"] {
+  box-shadow: 0 0 0 1px rgba(3, 199, 90, .10), 0 10px 30px -18px rgba(4, 100, 50, .45) !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"] {
-  position: relative;
-  overflow: hidden;
+`,
+    darkExtra: R => `
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"] {
+  background-image: none !important;
+  background-color: #03C75A !important;
+  color: #04140B !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .24), 0 2px 0 #029B46 !important;
 }
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]::after {
-  content: "";
-  position: absolute;
-  inset: -40% -60%;
-  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, .30) 50%, transparent 58%);
-  transform: translateX(-70%) rotate(8deg);
-  opacity: 0;
-  transition: transform .55s ease, opacity .2s ease;
-  pointer-events: none;
-}
-:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:hover::after {
-  transform: translateX(70%) rotate(8deg);
-  opacity: 1;
-}
-:root[data-hermes-theme="tide"] ::selection {
-  background: rgba(49, 130, 246, .22);
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover {
+  background-color: #0BD468 !important;
+  transform: translateY(-1px);
 }
 `
-}
+  },
+  {
+    accent: '#2BD97A',
+    accentDeep: '#7BE8AC',
+    accentSoft: 'rgba(3, 199, 90, .16)',
+    page: '#0E1411',
+    side: '#141C17',
+    line: '#26352C',
+    ink: '#EDF7F0',
+    text2: '#AFC2B5',
+    text3: '#7F9387',
+    hover: '#1B2820',
+    chip: '#1A2C21',
+    activeBg: '#1B2C21',
+    activeInk: '#6EE7A8',
+    activeShadow: 'inset 3px 0 0 #03C75A, 0 1px 0 rgba(255, 255, 255, .04)',
+    tabActiveBg: 'transparent',
+    tabActiveInk: '#4ADE80',
+    tabShadow: 'inset 0 -2px 0 #03C75A',
+    tabStrip: 'transparent',
+    composerShadow: '0 1px 0 rgba(255, 255, 255, .04) inset, 0 14px 36px -18px rgba(0, 0, 0, .8)',
+    glow: 'rgba(3, 199, 90, .10)'
+  }
+)
 
 export const MINT: DesktopTheme = {
   name: 'mint',
   label: 'Mint',
-  description: '화이트와 민트 그린, 정보 중심의 깔끔한 대시보드.',
+  description: '민트 그린과 얇은 격자. 각진 카드와 대문자 탭이 또렷한 테마.',
   colors: {
-    background: '#FFFFFF',
-    foreground: '#2E2E2E',
+    background: '#F6FBF8',
+    foreground: '#15231A',
     card: '#FFFFFF',
-    cardForeground: '#191F28',
+    cardForeground: '#15231A',
     muted: '#F8F9FA',
-    mutedForeground: '#555558',
+    mutedForeground: '#4B5A50',
     popover: '#FFFFFF',
-    popoverForeground: '#191F28',
+    popoverForeground: '#15231A',
     primary: '#03C75A',
     primaryForeground: '#FFFFFF',
     secondary: '#E6F9EE',
-    secondaryForeground: '#03A94D',
+    secondaryForeground: '#04783B',
     accent: '#E6F9EE',
-    accentForeground: '#03A94D',
-    border: '#E5E8EB',
-    input: '#E5E8EB',
+    accentForeground: '#04783B',
+    border: '#D5EBDD',
+    input: '#D5EBDD',
     ring: '#03C75A',
     midground: '#03C75A',
     destructive: '#F04452',
     destructiveForeground: '#FFFFFF',
-    sidebarBackground: '#FFFFFF',
-    sidebarBorder: '#E5E8EB',
-    userBubble: '#E6F9EE',
-    userBubbleBorder: '#C9EEDB'
+    sidebarBackground: '#EFF9F3',
+    sidebarBorder: '#D5EBDD',
+    userBubble: '#E4F8ED',
+    userBubbleBorder: '#BFE9CF'
   },
   darkColors: {
     background: '#111312',
@@ -225,94 +373,126 @@ export const MINT: DesktopTheme = {
     midground: '#03C75A',
     destructive: '#FF6B6B',
     destructiveForeground: '#1A0B0B',
-    sidebarBackground: '#141715',
-    sidebarBorder: '#29312C',
+    sidebarBackground: '#141C17',
+    sidebarBorder: '#26352C',
     userBubble: '#163024',
     userBubbleBorder: '#24513A'
   },
   typography: mintTypography,
-  customCSS: `
-:root[data-hermes-theme="mint"] {
-  --radius: 14px;
-  --ui-bg-chrome: #FFFFFF;
-  --ui-bg-sidebar: #FFFFFF;
-  --ui-bg-editor: #FFFFFF;
-  --ui-bg-elevated: #FFFFFF;
-  --ui-bg-card: #FFFFFF;
-  --ui-bg-input: #FFFFFF;
-  --ui-bg-primary: #FFFFFF;
-  --ui-bg-secondary: #F8F9FA;
-  --ui-bg-tertiary: #F2F4F6;
-  --ui-bg-quaternary: #EBEEF0;
-  --ui-bg-quinary: #E4E8EB;
-  --ui-text-primary: #2E2E2E;
-  --ui-text-secondary: #555558;
-  --ui-text-tertiary: #8A8D91;
-  --ui-text-quaternary: #B0B3B8;
-  --ui-stroke-primary: #DDE1E5;
-  --ui-stroke-secondary: #E5E8EB;
-  --ui-stroke-tertiary: #EEF1F3;
-  --ui-stroke-quaternary: #F7F8F9;
-  --ui-accent: #03C75A;
-  --ui-success: #03C75A;
-  --ui-control-hover-background: #F2F4F6;
-  --chrome-action-hover: #F2F4F6;
+  customCSS: mintChrome
 }
-:root[data-hermes-theme="mint"] [data-slot="button"] {
-  border-radius: 12px;
-  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+
+/* ── Frost ──────────────────────────────────────────────────────────────── */
+
+const frostChrome = buildChrome(
+  {
+    name: 'frost',
+    accent: '#0071E3',
+    accentDeep: '#0058B3',
+    accentSoft: '#E6F0FF',
+    page: '#F5F5F7',
+    side: '#F1F3F8',
+    line: '#DDE0E8',
+    ink: '#1D1D1F',
+    text2: '#5F5F66',
+    text3: '#8E8E93',
+    hover: 'rgba(255, 255, 255, .78)',
+    chip: '#E8ECF5',
+    activeBg: '#FFFFFF',
+    activeInk: '#0071E3',
+    activeShadow: '0 2px 10px -2px rgba(20, 40, 80, .16), inset 0 0 0 1px rgba(255, 255, 255, .9)',
+    tabActiveBg: 'rgba(255, 255, 255, .92)',
+    tabActiveInk: '#1D1D1F',
+    tabShadow: '0 1px 4px rgba(20, 40, 80, .14)',
+    tabStrip: 'transparent',
+    itemRadius: 12,
+    cardRadius: 24,
+    btnRadius: 12,
+    inputRadius: 14,
+    composerRadius: 26,
+    composerShadow: '0 18px 50px -18px rgba(20, 40, 80, .28), 0 1px 2px rgba(20, 40, 80, .06)',
+    glow: 'rgba(0, 113, 227, .10)',
+    displayFamily: 'Inter Tight',
+    displayWeight: 200,
+    displayTracking: '0.035em',
+    wordmarkGradient: 'linear-gradient(104deg, #0A84FF 0%, #74B9FF 42%, #1D1D1F 100%)',
+    wordmarkShadow: '0 16px 40px rgba(0, 113, 227, .22)',
+    extra: R => `
+${R} [data-slot="pane-tab"] { border-radius: 999px !important; }
+${R} [data-slot="pane-tab"][data-active="true"] { border-radius: 999px !important; }
+${R} [data-slot="sidebar"] { backdrop-filter: blur(26px) saturate(1.25); }
+${R} [data-slot="composer-surface"] { backdrop-filter: blur(26px) saturate(1.35); }
+`,
+    lightExtra: R => `
+${R}[data-hermes-mode="light"] [data-slot="composer-root"] {
+  --composer-fill: rgba(255, 255, 255, .72) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"] {
-  background-image: linear-gradient(180deg, #16D46B 0%, #03C75A 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .30), 0 6px 20px rgba(3, 199, 90, .24);
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"] {
+  border-radius: 999px !important;
+  background-image: linear-gradient(180deg, #3395FF 0%, #0071E3 100%) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .40), 0 8px 24px -8px rgba(0, 113, 227, .60) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:hover {
-  filter: brightness(1.04);
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"]:hover {
+  background-image: linear-gradient(180deg, #4AA4FF 0%, #0A7DF0 100%) !important;
   transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 10px 28px rgba(3, 199, 90, .34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 14px 32px -8px rgba(0, 113, 227, .66) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:active {
-  transform: translateY(0);
-  filter: brightness(.98);
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"],
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"] {
+  background: rgba(255, 255, 255, .66) !important;
+  border: 1px solid rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 1px 3px rgba(20, 40, 80, .08) !important;
+  backdrop-filter: blur(10px);
 }
-:root[data-hermes-theme="mint"] [data-slot="card"] {
-  border-radius: 16px;
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #FAFEFB 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 1px 2px rgba(25, 31, 40, .03), 0 12px 32px rgba(3, 199, 90, .06);
-  transition: transform .18s ease, box-shadow .18s ease;
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="outline"]:hover,
+${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="secondary"]:hover {
+  background: rgba(255, 255, 255, .92) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="card"]:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 2px 4px rgba(25, 31, 40, .04), 0 18px 44px rgba(3, 199, 90, .10);
+`,
+    darkExtra: R => `
+${R}[data-hermes-mode="dark"] [data-slot="composer-root"] {
+  --composer-fill: rgba(26, 30, 39, .72) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"] {
-  position: relative;
-  overflow: hidden;
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"] {
+  border-radius: 999px !important;
+  background-image: linear-gradient(180deg, #3395FF 0%, #0071E3 100%) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .30), 0 8px 26px -8px rgba(0, 113, 227, .70) !important;
 }
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]::after {
-  content: "";
-  position: absolute;
-  inset: -40% -60%;
-  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, .30) 50%, transparent 58%);
-  transform: translateX(-70%) rotate(8deg);
-  opacity: 0;
-  transition: transform .55s ease, opacity .2s ease;
-  pointer-events: none;
-}
-:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:hover::after {
-  transform: translateX(70%) rotate(8deg);
-  opacity: 1;
-}
-:root[data-hermes-theme="mint"] ::selection {
-  background: rgba(3, 199, 90, .22);
+${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover {
+  transform: translateY(-1px);
 }
 `
-}
+  },
+  {
+    accent: '#4DA3FF',
+    accentDeep: '#9CCBFF',
+    accentSoft: 'rgba(10, 132, 255, .18)',
+    page: '#0D0F14',
+    side: '#14171D',
+    line: '#272B34',
+    ink: '#F5F5F7',
+    text2: '#B9BEC8',
+    text3: '#8B919C',
+    hover: '#1B1F27',
+    chip: '#1D222B',
+    activeBg: '#232936',
+    activeInk: '#7DB8FF',
+    activeShadow: '0 2px 12px rgba(0, 0, 0, .40), inset 0 1px 0 rgba(255, 255, 255, .08)',
+    tabActiveBg: '#232936',
+    tabActiveInk: '#F5F5F7',
+    tabShadow: '0 2px 8px rgba(0, 0, 0, .35)',
+    tabStrip: 'transparent',
+    composerShadow: '0 24px 70px -20px rgba(0, 0, 0, .85), 0 1px 2px rgba(0, 0, 0, .6)',
+    glow: 'rgba(0, 113, 227, .14)'
+  }
+)
 
 export const FROST: DesktopTheme = {
   name: 'frost',
   label: 'Frost',
-  description: '반투명 유리 표면, 부드러운 그림자와 둥근 모서리.',
+  description: '유리처럼 반투명한 표면과 얇은 디스플레이 서체. 공기처럼 가벼운 테마.',
   colors: {
     background: '#F5F5F7',
     foreground: '#1D1D1F',
@@ -334,116 +514,39 @@ export const FROST: DesktopTheme = {
     midground: '#0071E3',
     destructive: '#FF3B30',
     destructiveForeground: '#FFFFFF',
-    sidebarBackground: '#FBFBFD',
-    sidebarBorder: '#D2D2D7',
-    userBubble: '#E8F0FE',
-    userBubbleBorder: '#C7DBFF'
+    sidebarBackground: '#F1F3F8',
+    sidebarBorder: '#DDE0E8',
+    userBubble: '#E6F0FF',
+    userBubbleBorder: '#CFE1FF'
   },
   darkColors: {
-    background: '#000000',
+    background: '#101114',
     foreground: '#F5F5F7',
-    card: '#1C1C1E',
+    card: '#1A1D24',
     cardForeground: '#F5F5F7',
-    muted: '#2C2C2E',
-    mutedForeground: '#A1A1A6',
-    popover: '#1C1C1E',
+    muted: '#1D2027',
+    mutedForeground: '#A1A6B0',
+    popover: '#1A1D24',
     popoverForeground: '#F5F5F7',
     primary: '#0A84FF',
     primaryForeground: '#FFFFFF',
-    secondary: '#2C2C2E',
-    secondaryForeground: '#F5F5F7',
-    accent: '#2C2C2E',
-    accentForeground: '#F5F5F7',
-    border: '#38383A',
-    input: '#38383A',
+    secondary: '#232833',
+    secondaryForeground: '#CFE1FF',
+    accent: '#232833',
+    accentForeground: '#CFE1FF',
+    border: '#2A2F3A',
+    input: '#2A2F3A',
     ring: '#0A84FF',
     midground: '#0A84FF',
     destructive: '#FF453A',
-    destructiveForeground: '#FFFFFF',
-    sidebarBackground: '#0A0A0A',
-    sidebarBorder: '#38383A',
-    userBubble: '#0A2540',
-    userBubbleBorder: '#1C3D5A'
+    destructiveForeground: '#1A0B0B',
+    sidebarBackground: '#14171D',
+    sidebarBorder: '#272B34',
+    userBubble: '#17263F',
+    userBubbleBorder: '#24406B'
   },
   typography: frostTypography,
-  customCSS: `
-:root[data-hermes-theme="frost"] {
-  --radius: 22px;
-  --ui-bg-chrome: #F5F5F7;
-  --ui-bg-sidebar: #FBFBFD;
-  --ui-bg-editor: #FFFFFF;
-  --ui-bg-elevated: #FFFFFF;
-  --ui-bg-card: #FFFFFF;
-  --ui-bg-input: #FFFFFF;
-  --ui-bg-primary: #FFFFFF;
-  --ui-bg-secondary: #F5F5F7;
-  --ui-bg-tertiary: #EDEDF0;
-  --ui-bg-quaternary: #E8E8ED;
-  --ui-bg-quinary: #E1E1E6;
-  --ui-text-primary: #1D1D1F;
-  --ui-text-secondary: #6E6E73;
-  --ui-text-tertiary: #8E8E93;
-  --ui-text-quaternary: #B0B0B5;
-  --ui-stroke-primary: #D2D2D7;
-  --ui-stroke-secondary: #D2D2D7;
-  --ui-stroke-tertiary: #E5E5EA;
-  --ui-stroke-quaternary: #F2F2F7;
-  --ui-accent: #0071E3;
-  --ui-success: #34C759;
-  --ui-control-hover-background: #F2F2F7;
-  --chrome-action-hover: #F2F2F7;
-}
-:root[data-hermes-theme="frost"] [data-slot="card"] {
-  background: color-mix(in srgb, var(--card) 74%, transparent);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-radius: 22px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, .08), inset 0 1px 0 rgba(255, 255, 255, .55);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-:root[data-hermes-theme="frost"] [data-slot="card"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .12), inset 0 1px 0 rgba(255, 255, 255, .65);
-}
-:root[data-hermes-theme="frost"] [data-slot="button"] {
-  border-radius: 999px;
-  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"] {
-  background-image: linear-gradient(180deg, #2B9BFF 0%, #0071E3 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px rgba(0, 113, 227, .28);
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:hover {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 10px 28px rgba(0, 113, 227, .38);
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:active {
-  transform: translateY(0);
-  filter: brightness(.98);
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"] {
-  position: relative;
-  overflow: hidden;
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]::after {
-  content: "";
-  position: absolute;
-  inset: -40% -60%;
-  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, .30) 50%, transparent 58%);
-  transform: translateX(-70%) rotate(8deg);
-  opacity: 0;
-  transition: transform .55s ease, opacity .2s ease;
-  pointer-events: none;
-}
-:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:hover::after {
-  transform: translateX(70%) rotate(8deg);
-  opacity: 1;
-}
-:root[data-hermes-theme="frost"] ::selection {
-  background: rgba(0, 113, 227, .22);
-}
-`
+  customCSS: frostChrome
 }
 
 export const OUR_THEMES: DesktopTheme[] = [TIDE, MINT, FROST]
