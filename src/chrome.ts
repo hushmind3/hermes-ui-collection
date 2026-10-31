@@ -319,6 +319,105 @@ ${R} [data-slot="composer-surface"] button {
   border-radius: calc(var(--t-composer-radius) * .55) !important;
 }
 
+/* ── Hermes Bots rooms ─────────────────────────────────────────────────── */
+/* The bots plugin draws its room with plain markup (a <section> holding a
+   <header>, a role=log and a <form>). Those three hooks are stable enough to
+   dress the whole room without touching the plugin. #root carries enough
+   specificity to beat the mode-scoped button rules below. */
+
+/* Gateway group switcher at the top of the BOTS pane. */
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) {
+  padding: 8px 8px 6px !important;
+  gap: 2px !important;
+  border-bottom: 1px solid var(--t-line) !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button {
+  width: 100% !important;
+  min-height: 30px !important;
+  justify-content: flex-start !important;
+  padding: 0 10px !important;
+  border-radius: calc(var(--t-item-radius) * .9) !important;
+  color: var(--t-text-2) !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button:first-child {
+  color: var(--t-accent) !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button:hover {
+  background: var(--t-hover) !important;
+  color: var(--t-ink) !important;
+}
+
+${R} #root section:has(> [role="log"]) {
+  background: var(--t-page) !important;
+  padding: 14px 18px 16px !important;
+  gap: 12px !important;
+}
+${R} #root section:has(> [role="log"]) > header {
+  background: var(--t-side) !important;
+  border: 1px solid var(--t-line) !important;
+  border-radius: var(--t-card-radius) !important;
+  padding: 10px 12px !important;
+  box-shadow: 0 1px 2px rgba(16, 30, 50, .05) !important;
+}
+${R} #root section:has(> [role="log"]) > header [data-slot="button"] {
+  border-radius: 999px !important;
+  border: 1px solid var(--t-line) !important;
+  background: var(--t-card) !important;
+  background-image: none !important;
+  color: var(--t-text-2) !important;
+  box-shadow: none !important;
+}
+${R} #root section:has(> [role="log"]) > header [data-slot="button"]:hover {
+  background: var(--t-hover) !important;
+  color: var(--t-ink) !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] {
+  padding: 0 2px !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] > div {
+  border: 1px solid var(--t-line) !important;
+  border-radius: calc(var(--t-card-radius) * .7) !important;
+  background: var(--t-side) !important;
+  padding: 10px 12px !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] > div:hover {
+  border-color: color-mix(in srgb, var(--t-accent) 38%, var(--t-line)) !important;
+}
+${R} #root section:has(> [role="log"]) > form {
+  align-items: center !important;
+  background: var(--t-side) !important;
+  border: 1px solid var(--t-line) !important;
+  border-radius: var(--t-composer-radius) !important;
+  padding: 8px !important;
+  box-shadow: var(--t-composer-shadow) !important;
+}
+${R} #root section:has(> [role="log"]) > form textarea {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: 34px !important;
+  padding: 8px 10px !important;
+}
+${R} #root section:has(> [role="log"]) > form button[data-slot="button"] {
+  border-radius: 999px !important;
+}
+${R} #root section:has(> [role="log"]) > form > div > button[data-slot="button"] {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px dashed var(--t-line) !important;
+  color: var(--t-text-2) !important;
+  box-shadow: none !important;
+}
+${R} #root section:has(> [role="log"]) > form > button[data-slot="button"] {
+  background: var(--t-accent) !important;
+  background-image: none !important;
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--t-accent) 70%, transparent) !important;
+}
+
 /* ── Transcript ────────────────────────────────────────────────────────── */
 
 ${R} [data-role="user"] [class*="composer-human-message"] {

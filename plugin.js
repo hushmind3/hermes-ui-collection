@@ -507,6 +507,105 @@ ${R} [data-slot="composer-surface"] button {
   border-radius: calc(var(--t-composer-radius) * .55) !important;
 }
 
+/* \u2500\u2500 Hermes Bots rooms \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+/* The bots plugin draws its room with plain markup (a <section> holding a
+   <header>, a role=log and a <form>). Those three hooks are stable enough to
+   dress the whole room without touching the plugin. #root carries enough
+   specificity to beat the mode-scoped button rules below. */
+
+/* Gateway group switcher at the top of the BOTS pane. */
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) {
+  padding: 8px 8px 6px !important;
+  gap: 2px !important;
+  border-bottom: 1px solid var(--t-line) !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button {
+  width: 100% !important;
+  min-height: 30px !important;
+  justify-content: flex-start !important;
+  padding: 0 10px !important;
+  border-radius: calc(var(--t-item-radius) * .9) !important;
+  color: var(--t-text-2) !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button:first-child {
+  color: var(--t-accent) !important;
+}
+${R} div.grid.gap-1.px-2:has(> button[data-variant="ghost"]) > button:hover {
+  background: var(--t-hover) !important;
+  color: var(--t-ink) !important;
+}
+
+${R} #root section:has(> [role="log"]) {
+  background: var(--t-page) !important;
+  padding: 14px 18px 16px !important;
+  gap: 12px !important;
+}
+${R} #root section:has(> [role="log"]) > header {
+  background: var(--t-side) !important;
+  border: 1px solid var(--t-line) !important;
+  border-radius: var(--t-card-radius) !important;
+  padding: 10px 12px !important;
+  box-shadow: 0 1px 2px rgba(16, 30, 50, .05) !important;
+}
+${R} #root section:has(> [role="log"]) > header [data-slot="button"] {
+  border-radius: 999px !important;
+  border: 1px solid var(--t-line) !important;
+  background: var(--t-card) !important;
+  background-image: none !important;
+  color: var(--t-text-2) !important;
+  box-shadow: none !important;
+}
+${R} #root section:has(> [role="log"]) > header [data-slot="button"]:hover {
+  background: var(--t-hover) !important;
+  color: var(--t-ink) !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] {
+  padding: 0 2px !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] > div {
+  border: 1px solid var(--t-line) !important;
+  border-radius: calc(var(--t-card-radius) * .7) !important;
+  background: var(--t-side) !important;
+  padding: 10px 12px !important;
+}
+${R} #root section:has(> [role="log"]) > [role="log"] > div:hover {
+  border-color: color-mix(in srgb, var(--t-accent) 38%, var(--t-line)) !important;
+}
+${R} #root section:has(> [role="log"]) > form {
+  align-items: center !important;
+  background: var(--t-side) !important;
+  border: 1px solid var(--t-line) !important;
+  border-radius: var(--t-composer-radius) !important;
+  padding: 8px !important;
+  box-shadow: var(--t-composer-shadow) !important;
+}
+${R} #root section:has(> [role="log"]) > form textarea {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: 34px !important;
+  padding: 8px 10px !important;
+}
+${R} #root section:has(> [role="log"]) > form button[data-slot="button"] {
+  border-radius: 999px !important;
+}
+${R} #root section:has(> [role="log"]) > form > div > button[data-slot="button"] {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px dashed var(--t-line) !important;
+  color: var(--t-text-2) !important;
+  box-shadow: none !important;
+}
+${R} #root section:has(> [role="log"]) > form > button[data-slot="button"] {
+  background: var(--t-accent) !important;
+  background-image: none !important;
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--t-accent) 70%, transparent) !important;
+}
+
 /* \u2500\u2500 Transcript \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
 
 ${R} [data-role="user"] [class*="composer-human-message"] {
@@ -598,24 +697,24 @@ ${t.darkExtra(R)}
 
 // src/themes.ts
 var tideTypography = {
-  fontSans: '"Gothic A1", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
-  fontUrl: "https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap",
+  fontSans: '"SUIT Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
+  fontUrl: "https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
-  letterSpacing: "-0.005em"
+  letterSpacing: "-0.01em"
 };
 var mintTypography = {
   fontSans: '"IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif',
-  fontUrl: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=DM+Serif+Display&display=swap",
+  fontUrl: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
   letterSpacing: "0em"
 };
 var frostTypography = {
-  fontSans: 'Sunflower, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
-  fontUrl: "https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&family=Inter+Tight:wght@200;300;800&display=swap",
+  fontSans: '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
+  fontUrl: "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter+Tight:wght@200;300;800&display=swap",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
@@ -627,31 +726,31 @@ var tideChrome = buildChrome(
     accent: "#3182F6",
     accentDeep: "#1B64DA",
     accentSoft: "#E8F2FF",
-    page: "#F4F5F8",
-    side: "#EDF2FA",
-    line: "#DCE5F2",
-    ink: "#16202E",
+    page: "#F7F8FA",
+    side: "#FFFFFF",
+    line: "#E7EAEE",
+    ink: "#191F28",
     text2: "#4E5968",
     text3: "#8B95A1",
-    hover: "#E2EBF9",
-    chip: "#DEEAFC",
+    hover: "#F2F4F6",
+    chip: "#EDF2F7",
     activeBg: "#3182F6",
     activeInk: "#FFFFFF",
     activeShadow: "0 4px 14px -3px rgba(49, 130, 246, .55)",
     tabActiveBg: "#FFFFFF",
     tabActiveInk: "#1B64DA",
     tabShadow: "0 1px 2px rgba(20, 50, 90, .14), 0 0 0 1px rgba(20, 50, 90, .04)",
-    tabStrip: "#E7EEF9",
+    tabStrip: "#F2F4F6",
     itemRadius: 9,
     cardRadius: 20,
     btnRadius: 12,
     inputRadius: 12,
     composerRadius: 24,
-    composerShadow: "0 10px 30px -10px rgba(20, 50, 90, .22), 0 1px 2px rgba(20, 50, 90, .06)",
-    glow: "rgba(49, 130, 246, .10)",
-    displayFamily: "Space Grotesk",
-    displayWeight: 700,
-    displayTracking: "-0.055em",
+    composerShadow: "0 8px 24px -14px rgba(20, 50, 90, .20), 0 1px 2px rgba(20, 50, 90, .05)",
+    glow: "rgba(49, 130, 246, .04)",
+    displayFamily: "SUIT Variable",
+    displayWeight: 800,
+    displayTracking: "-0.04em",
     wordmarkGradient: "linear-gradient(112deg, #1B64DA 0%, #4C9BFF 45%, #0A2A66 100%)",
     wordmarkShadow: "0 14px 34px rgba(49, 130, 246, .28)",
     extra: (R) => `
@@ -720,13 +819,13 @@ ${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover
 var TIDE = {
   name: "tide",
   label: "Tide",
-  description: "\uCFE8\uD55C \uBE14\uB8E8\uC640 \uB109\uB109\uD55C \uACE1\uB960. \uCE74\uB4DC\uAC00 \uB5A0 \uC788\uACE0 \uC0AC\uC774\uB4DC\uBC14\uAC00 \uB610\uB837\uD55C \uD14C\uB9C8.",
+  description: "\uAE68\uB057\uD55C \uD654\uC774\uD2B8\uC640 \uCF54\uBC1C\uD2B8 \uBE14\uB8E8. \uC0AC\uC774\uB4DC\uBC14\xB7\uD0ED\xB7\uCE74\uB4DC\uAC00 \uB610\uB837\uD55C \uAE30\uBCF8 \uD14C\uB9C8.",
   colors: {
-    background: "#F4F5F8",
-    foreground: "#1A1F29",
+    background: "#F7F8FA",
+    foreground: "#191F28",
     card: "#FFFFFF",
     cardForeground: "#191F28",
-    muted: "#F4F5F8",
+    muted: "#F2F4F6",
     mutedForeground: "#4E5968",
     popover: "#FFFFFF",
     popoverForeground: "#191F28",
@@ -736,14 +835,14 @@ var TIDE = {
     secondaryForeground: "#1B64DA",
     accent: "#E8F3FF",
     accentForeground: "#1B64DA",
-    border: "#E5E8EB",
-    input: "#E5E8EB",
+    border: "#E7EAEE",
+    input: "#E7EAEE",
     ring: "#3182F6",
     midground: "#2272EB",
     destructive: "#F04452",
     destructiveForeground: "#FFFFFF",
-    sidebarBackground: "#EDF2FA",
-    sidebarBorder: "#DCE5F2",
+    sidebarBackground: "#FFFFFF",
+    sidebarBorder: "#E7EAEE",
     userBubble: "#E8F3FF",
     userBubbleBorder: "#D6E7FF"
   },
@@ -782,14 +881,14 @@ var mintChrome = buildChrome(
     accent: "#03C75A",
     accentDeep: "#04783B",
     accentSoft: "#E4F8ED",
-    page: "#F6FBF8",
-    side: "#EFF9F3",
-    line: "#D5EBDD",
+    page: "#FBFDFC",
+    side: "#F3FAF6",
+    line: "#DCEFE3",
     ink: "#15231A",
     text2: "#4B5A50",
     text3: "#85938A",
-    hover: "#E2F5EA",
-    chip: "#DCF3E4",
+    hover: "#EAF7EF",
+    chip: "#E3F5EA",
     activeBg: "#FFFFFF",
     activeInk: "#04783B",
     activeShadow: "inset 3px 0 0 #03C75A, 0 1px 3px rgba(4, 80, 32, .12)",
@@ -803,10 +902,10 @@ var mintChrome = buildChrome(
     inputRadius: 6,
     composerRadius: 10,
     composerShadow: "0 1px 0 rgba(255, 255, 255, .6) inset, 0 8px 24px -14px rgba(4, 100, 50, .35)",
-    glow: "rgba(3, 199, 90, .08)",
-    displayFamily: "DM Serif Display",
-    displayWeight: 400,
-    displayTracking: "-0.02em",
+    glow: "rgba(3, 199, 90, .05)",
+    displayFamily: "Manrope",
+    displayWeight: 800,
+    displayTracking: "-0.03em",
     wordmarkGradient: "linear-gradient(112deg, #04783B 0%, #03C75A 50%, #0A5C34 100%)",
     wordmarkShadow: "0 14px 34px rgba(3, 199, 90, .24)",
     extra: (R) => `
@@ -830,10 +929,8 @@ ${R} [data-slot="sidebar-menu-item"] > button > .codicon { border-radius: 4px !i
 `,
     lightExtra: (R) => `
 ${R}[data-hermes-mode="light"] [data-tree-group]:not(:has([data-slot="sidebar"])) {
-  background-image: radial-gradient(circle, rgba(3, 199, 90, .15) 1px, transparent 1.4px) !important;
-  background-size: 18px 18px !important;
-  background-position: -9px -9px !important;
-  background-repeat: repeat !important;
+  background-image: radial-gradient(90% 55% at 50% 0%, rgba(3, 199, 90, .06), transparent 62%) !important;
+  background-repeat: no-repeat !important;
 }
 ${R}[data-hermes-mode="light"] [data-slot="button"][data-variant="default"] {
   background-image: none !important;
@@ -905,13 +1002,13 @@ ${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover
 var MINT = {
   name: "mint",
   label: "Mint",
-  description: "\uBBFC\uD2B8 \uADF8\uB9B0\uACFC \uC587\uC740 \uACA9\uC790. \uAC01\uC9C4 \uCE74\uB4DC\uC640 \uB300\uBB38\uC790 \uD0ED\uC774 \uB610\uB837\uD55C \uD14C\uB9C8.",
+  description: "\uD654\uC774\uD2B8 \uBC14\uD0D5\uC5D0 \uBBFC\uD2B8 \uADF8\uB9B0 \uD3EC\uC778\uD2B8. \uCC28\uBD84\uD558\uACE0 \uC815\uBCF4 \uC911\uC2EC\uC778 \uD14C\uB9C8.",
   colors: {
-    background: "#F6FBF8",
+    background: "#FBFDFC",
     foreground: "#15231A",
     card: "#FFFFFF",
     cardForeground: "#15231A",
-    muted: "#F8F9FA",
+    muted: "#F4FAF6",
     mutedForeground: "#4B5A50",
     popover: "#FFFFFF",
     popoverForeground: "#15231A",
@@ -921,14 +1018,14 @@ var MINT = {
     secondaryForeground: "#04783B",
     accent: "#E6F9EE",
     accentForeground: "#04783B",
-    border: "#D5EBDD",
-    input: "#D5EBDD",
+    border: "#DCEFE3",
+    input: "#DCEFE3",
     ring: "#03C75A",
     midground: "#03C75A",
     destructive: "#F04452",
     destructiveForeground: "#FFFFFF",
-    sidebarBackground: "#EFF9F3",
-    sidebarBorder: "#D5EBDD",
+    sidebarBackground: "#F3FAF6",
+    sidebarBorder: "#DCEFE3",
     userBubble: "#E4F8ED",
     userBubbleBorder: "#BFE9CF"
   },
@@ -967,14 +1064,14 @@ var frostChrome = buildChrome(
     accent: "#0071E3",
     accentDeep: "#0058B3",
     accentSoft: "#E6F0FF",
-    page: "#F5F5F7",
-    side: "#F1F3F8",
-    line: "#DDE0E8",
+    page: "#F5F6F9",
+    side: "#F4F6FA",
+    line: "#DFE3EA",
     ink: "#1D1D1F",
     text2: "#5F5F66",
     text3: "#8E8E93",
-    hover: "rgba(255, 255, 255, .78)",
-    chip: "#E8ECF5",
+    hover: "rgba(255, 255, 255, .8)",
+    chip: "#E9EDF5",
     activeBg: "#FFFFFF",
     activeInk: "#0071E3",
     activeShadow: "0 2px 10px -2px rgba(20, 40, 80, .16), inset 0 0 0 1px rgba(255, 255, 255, .9)",
@@ -988,7 +1085,7 @@ var frostChrome = buildChrome(
     inputRadius: 14,
     composerRadius: 26,
     composerShadow: "0 18px 50px -18px rgba(20, 40, 80, .28), 0 1px 2px rgba(20, 40, 80, .06)",
-    glow: "rgba(0, 113, 227, .10)",
+    glow: "rgba(0, 113, 227, .06)",
     displayFamily: "Inter Tight",
     displayWeight: 200,
     displayTracking: "0.035em",
@@ -1068,13 +1165,13 @@ ${R}[data-hermes-mode="dark"] [data-slot="button"][data-variant="default"]:hover
 var FROST = {
   name: "frost",
   label: "Frost",
-  description: "\uC720\uB9AC\uCC98\uB7FC \uBC18\uD22C\uBA85\uD55C \uD45C\uBA74\uACFC \uC587\uC740 \uB514\uC2A4\uD50C\uB808\uC774 \uC11C\uCCB4. \uACF5\uAE30\uCC98\uB7FC \uAC00\uBCBC\uC6B4 \uD14C\uB9C8.",
+  description: "\uBC18\uD22C\uBA85 \uC720\uB9AC \uD45C\uBA74\uACFC \uAC00\uBCBC\uC6B4 \uC11C\uCCB4. \uBD80\uB4DC\uB7FD\uACE0 \uC870\uC6A9\uD55C \uD14C\uB9C8.",
   colors: {
-    background: "#F5F5F7",
+    background: "#F5F6F9",
     foreground: "#1D1D1F",
     card: "#FFFFFF",
     cardForeground: "#1D1D1F",
-    muted: "#F5F5F7",
+    muted: "#F5F6F9",
     mutedForeground: "#6E6E73",
     popover: "#FFFFFF",
     popoverForeground: "#1D1D1F",
@@ -1084,14 +1181,14 @@ var FROST = {
     secondaryForeground: "#1D1D1F",
     accent: "#E8E8ED",
     accentForeground: "#1D1D1F",
-    border: "#D2D2D7",
-    input: "#D2D2D7",
+    border: "#DFE3EA",
+    input: "#DFE3EA",
     ring: "#0071E3",
     midground: "#0071E3",
     destructive: "#FF3B30",
     destructiveForeground: "#FFFFFF",
-    sidebarBackground: "#F1F3F8",
-    sidebarBorder: "#DDE0E8",
+    sidebarBackground: "#F4F6FA",
+    sidebarBorder: "#DFE3EA",
     userBubble: "#E6F0FF",
     userBubbleBorder: "#CFE1FF"
   },
