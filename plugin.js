@@ -146,31 +146,34 @@ function Dashboard() {
 import { Button as Button2, useTheme } from "@hermes/plugin-sdk";
 
 // src/themes.ts
-var tossTypography = {
+var tideTypography = {
   fontSans: 'Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif',
+  fontUrl: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
   letterSpacing: "-0.01em"
 };
-var naverTypography = {
-  fontSans: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif',
+var mintTypography = {
+  fontSans: '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif',
+  fontUrl: "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
   letterSpacing: "-0.01em"
 };
-var appleTypography = {
-  fontSans: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Apple SD Gothic Neo", sans-serif',
+var frostTypography = {
+  fontSans: 'Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Apple SD Gothic Neo", sans-serif',
+  fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
   fontMono: "ui-monospace, SFMono-Regular, Menlo, monospace",
   baseSize: "14px",
   lineHeight: "1.5",
   letterSpacing: "-0.015em"
 };
-var TOSS = {
-  name: "toss",
-  label: "Toss",
-  description: "\uD1A0\uC2A4\uC99D\uAD8C\uCC98\uB7FC \uBC1D\uC740 \uD68C\uC0C9 \uBC30\uACBD, \uD30C\uB780 \uD3EC\uC778\uD2B8, \uD070 \uC22B\uC790\uC640 \uB465\uADFC \uCE74\uB4DC.",
+var TIDE = {
+  name: "tide",
+  label: "Tide",
+  description: "\uBC1D\uC740 \uD68C\uC0C9 \uBC30\uACBD\uACFC \uCF54\uBC1C\uD2B8 \uBE14\uB8E8, \uB465\uADFC \uCE74\uB4DC\uC640 \uBD80\uB4DC\uB7EC\uC6B4 \uADF8\uB9BC\uC790.",
   colors: {
     background: "#F4F5F8",
     foreground: "#1A1F29",
@@ -223,33 +226,56 @@ var TOSS = {
     userBubble: "#1E2A3A",
     userBubbleBorder: "#2E4360"
   },
-  typography: tossTypography,
+  typography: tideTypography,
   customCSS: `
-:root[data-hermes-theme="toss"] {
+:root[data-hermes-theme="tide"] {
   --radius: 16px;
+  --ui-bg-chrome: #F4F5F8;
+  --ui-bg-sidebar: #FFFFFF;
+  --ui-bg-editor: #FFFFFF;
+  --ui-bg-elevated: #FFFFFF;
+  --ui-bg-card: #FFFFFF;
+  --ui-bg-input: #FFFFFF;
+  --ui-bg-primary: #FFFFFF;
+  --ui-bg-secondary: #F4F5F8;
+  --ui-bg-tertiary: #EDEFF2;
+  --ui-bg-quaternary: #E8EBEF;
+  --ui-bg-quinary: #E1E5EA;
+  --ui-text-primary: #1A1F29;
+  --ui-text-secondary: #4E5968;
+  --ui-text-tertiary: #8B95A1;
+  --ui-text-quaternary: #B0B8C1;
+  --ui-stroke-primary: #D1D6DB;
+  --ui-stroke-secondary: #E5E8EB;
+  --ui-stroke-tertiary: #EDEFF2;
+  --ui-stroke-quaternary: #F2F4F6;
+  --ui-accent: #3182F6;
+  --ui-success: #00B96B;
+  --ui-control-hover-background: #F2F4F6;
+  --chrome-action-hover: #F2F4F6;
 }
-:root[data-hermes-theme="toss"] [data-slot="button"] {
+:root[data-hermes-theme="tide"] [data-slot="button"] {
   border-radius: 12px;
   transition: transform .16s ease, box-shadow .16s ease, filter .16s ease, background-color .16s ease;
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"] {
   background-image: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 58%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .30), 0 2px 6px rgba(49, 130, 246, .24);
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"]:hover {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:hover {
   filter: brightness(1.04);
   transform: translateY(-1px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 8px 20px rgba(49, 130, 246, .30);
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"]:active {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:active {
   transform: translateY(0);
   filter: brightness(.98);
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="secondary"],
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="outline"] {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="secondary"],
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="outline"] {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 1px 2px rgba(25, 31, 40, .04);
 }
-:root[data-hermes-theme="toss"] [data-slot="card"] {
+:root[data-hermes-theme="tide"] [data-slot="card"] {
   border-radius: 20px;
   background-image: linear-gradient(180deg, #FFFFFF 0%, #FBFCFD 100%);
   box-shadow:
@@ -259,7 +285,7 @@ var TOSS = {
     rgba(0, 0, 0, .04) 0 1px 1px;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-:root[data-hermes-theme="toss"] [data-slot="card"]:hover {
+:root[data-hermes-theme="tide"] [data-slot="card"]:hover {
   transform: translateY(-2px);
   box-shadow:
     rgba(255, 255, 255, .96) 0 0 0 .75px inset,
@@ -267,11 +293,11 @@ var TOSS = {
     rgba(0, 0, 0, .10) 0 0 0 .5px,
     rgba(0, 29, 58, .12) 0 8px 24px -6px;
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"] {
   position: relative;
   overflow: hidden;
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"]::after {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]::after {
   content: "";
   position: absolute;
   inset: -40% -60%;
@@ -281,19 +307,19 @@ var TOSS = {
   transition: transform .55s ease, opacity .2s ease;
   pointer-events: none;
 }
-:root[data-hermes-theme="toss"] [data-slot="button"][data-variant="default"]:hover::after {
+:root[data-hermes-theme="tide"] [data-slot="button"][data-variant="default"]:hover::after {
   transform: translateX(70%) rotate(8deg);
   opacity: 1;
 }
-:root[data-hermes-theme="toss"] ::selection {
+:root[data-hermes-theme="tide"] ::selection {
   background: rgba(49, 130, 246, .22);
 }
 `
 };
-var NAVER = {
-  name: "naver",
-  label: "Naver",
-  description: "\uD770 \uBC30\uACBD\uACFC \uB124\uC774\uBC84 \uADF8\uB9B0 \uD3EC\uC778\uD2B8, \uC815\uBCF4 \uBC00\uB3C4 \uC788\uB294 \uB300\uC2DC\uBCF4\uB4DC.",
+var MINT = {
+  name: "mint",
+  label: "Mint",
+  description: "\uD654\uC774\uD2B8\uC640 \uBBFC\uD2B8 \uADF8\uB9B0, \uC815\uBCF4 \uC911\uC2EC\uC758 \uAE54\uB054\uD55C \uB300\uC2DC\uBCF4\uB4DC.",
   colors: {
     background: "#FFFFFF",
     foreground: "#2E2E2E",
@@ -346,40 +372,66 @@ var NAVER = {
     userBubble: "#163024",
     userBubbleBorder: "#24513A"
   },
-  typography: naverTypography,
+  typography: mintTypography,
   customCSS: `
-:root[data-hermes-theme="naver"] [data-slot="button"] {
+:root[data-hermes-theme="mint"] {
+  --radius: 14px;
+  --ui-bg-chrome: #FFFFFF;
+  --ui-bg-sidebar: #FFFFFF;
+  --ui-bg-editor: #FFFFFF;
+  --ui-bg-elevated: #FFFFFF;
+  --ui-bg-card: #FFFFFF;
+  --ui-bg-input: #FFFFFF;
+  --ui-bg-primary: #FFFFFF;
+  --ui-bg-secondary: #F8F9FA;
+  --ui-bg-tertiary: #F2F4F6;
+  --ui-bg-quaternary: #EBEEF0;
+  --ui-bg-quinary: #E4E8EB;
+  --ui-text-primary: #2E2E2E;
+  --ui-text-secondary: #555558;
+  --ui-text-tertiary: #8A8D91;
+  --ui-text-quaternary: #B0B3B8;
+  --ui-stroke-primary: #DDE1E5;
+  --ui-stroke-secondary: #E5E8EB;
+  --ui-stroke-tertiary: #EEF1F3;
+  --ui-stroke-quaternary: #F7F8F9;
+  --ui-accent: #03C75A;
+  --ui-success: #03C75A;
+  --ui-control-hover-background: #F2F4F6;
+  --chrome-action-hover: #F2F4F6;
+}
+:root[data-hermes-theme="mint"] [data-slot="button"] {
   border-radius: 12px;
   transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"] {
   background-image: linear-gradient(180deg, #16D46B 0%, #03C75A 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .30), 0 6px 20px rgba(3, 199, 90, .24);
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"]:hover {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:hover {
   filter: brightness(1.04);
   transform: translateY(-1px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .36), 0 10px 28px rgba(3, 199, 90, .34);
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"]:active {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:active {
   transform: translateY(0);
   filter: brightness(.98);
 }
-:root[data-hermes-theme="naver"] [data-slot="card"] {
+:root[data-hermes-theme="mint"] [data-slot="card"] {
   border-radius: 16px;
   background-image: linear-gradient(180deg, #FFFFFF 0%, #FAFEFB 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 1px 2px rgba(25, 31, 40, .03), 0 12px 32px rgba(3, 199, 90, .06);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-:root[data-hermes-theme="naver"] [data-slot="card"]:hover {
+:root[data-hermes-theme="mint"] [data-slot="card"]:hover {
   transform: translateY(-2px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 2px 4px rgba(25, 31, 40, .04), 0 18px 44px rgba(3, 199, 90, .10);
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"] {
   position: relative;
   overflow: hidden;
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"]::after {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]::after {
   content: "";
   position: absolute;
   inset: -40% -60%;
@@ -389,19 +441,19 @@ var NAVER = {
   transition: transform .55s ease, opacity .2s ease;
   pointer-events: none;
 }
-:root[data-hermes-theme="naver"] [data-slot="button"][data-variant="default"]:hover::after {
+:root[data-hermes-theme="mint"] [data-slot="button"][data-variant="default"]:hover::after {
   transform: translateX(70%) rotate(8deg);
   opacity: 1;
 }
-:root[data-hermes-theme="naver"] ::selection {
+:root[data-hermes-theme="mint"] ::selection {
   background: rgba(3, 199, 90, .22);
 }
 `
 };
-var APPLE = {
-  name: "apple",
-  label: "Apple",
-  description: "\uC544\uC774\uD3F0\uCC98\uB7FC \uBC18\uC9C8\uBC18\uC9C8\uD55C \uC720\uB9AC \uD45C\uBA74, \uBD80\uB4DC\uB7EC\uC6B4 \uADF8\uB9BC\uC790\uC640 \uB465\uADFC \uBAA8\uC11C\uB9AC.",
+var FROST = {
+  name: "frost",
+  label: "Frost",
+  description: "\uBC18\uD22C\uBA85 \uC720\uB9AC \uD45C\uBA74, \uBD80\uB4DC\uB7EC\uC6B4 \uADF8\uB9BC\uC790\uC640 \uB465\uADFC \uBAA8\uC11C\uB9AC.",
   colors: {
     background: "#F5F5F7",
     foreground: "#1D1D1F",
@@ -454,9 +506,35 @@ var APPLE = {
     userBubble: "#0A2540",
     userBubbleBorder: "#1C3D5A"
   },
-  typography: appleTypography,
+  typography: frostTypography,
   customCSS: `
-:root[data-hermes-theme="apple"] [data-slot="card"] {
+:root[data-hermes-theme="frost"] {
+  --radius: 22px;
+  --ui-bg-chrome: #F5F5F7;
+  --ui-bg-sidebar: #FBFBFD;
+  --ui-bg-editor: #FFFFFF;
+  --ui-bg-elevated: #FFFFFF;
+  --ui-bg-card: #FFFFFF;
+  --ui-bg-input: #FFFFFF;
+  --ui-bg-primary: #FFFFFF;
+  --ui-bg-secondary: #F5F5F7;
+  --ui-bg-tertiary: #EDEDF0;
+  --ui-bg-quaternary: #E8E8ED;
+  --ui-bg-quinary: #E1E1E6;
+  --ui-text-primary: #1D1D1F;
+  --ui-text-secondary: #6E6E73;
+  --ui-text-tertiary: #8E8E93;
+  --ui-text-quaternary: #B0B0B5;
+  --ui-stroke-primary: #D2D2D7;
+  --ui-stroke-secondary: #D2D2D7;
+  --ui-stroke-tertiary: #E5E5EA;
+  --ui-stroke-quaternary: #F2F2F7;
+  --ui-accent: #0071E3;
+  --ui-success: #34C759;
+  --ui-control-hover-background: #F2F2F7;
+  --chrome-action-hover: #F2F2F7;
+}
+:root[data-hermes-theme="frost"] [data-slot="card"] {
   background: color-mix(in srgb, var(--card) 74%, transparent);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
@@ -464,32 +542,32 @@ var APPLE = {
   box-shadow: 0 12px 40px rgba(0, 0, 0, .08), inset 0 1px 0 rgba(255, 255, 255, .55);
   transition: transform .2s ease, box-shadow .2s ease;
 }
-:root[data-hermes-theme="apple"] [data-slot="card"]:hover {
+:root[data-hermes-theme="frost"] [data-slot="card"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 48px rgba(0, 0, 0, .12), inset 0 1px 0 rgba(255, 255, 255, .65);
 }
-:root[data-hermes-theme="apple"] [data-slot="button"] {
+:root[data-hermes-theme="frost"] [data-slot="button"] {
   border-radius: 999px;
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"] {
   background-image: linear-gradient(180deg, #2B9BFF 0%, #0071E3 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px rgba(0, 113, 227, .28);
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"]:hover {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:hover {
   filter: brightness(1.05);
   transform: translateY(-1px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 10px 28px rgba(0, 113, 227, .38);
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"]:active {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:active {
   transform: translateY(0);
   filter: brightness(.98);
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"] {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"] {
   position: relative;
   overflow: hidden;
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"]::after {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]::after {
   content: "";
   position: absolute;
   inset: -40% -60%;
@@ -499,16 +577,16 @@ var APPLE = {
   transition: transform .55s ease, opacity .2s ease;
   pointer-events: none;
 }
-:root[data-hermes-theme="apple"] [data-slot="button"][data-variant="default"]:hover::after {
+:root[data-hermes-theme="frost"] [data-slot="button"][data-variant="default"]:hover::after {
   transform: translateX(70%) rotate(8deg);
   opacity: 1;
 }
-:root[data-hermes-theme="apple"] ::selection {
+:root[data-hermes-theme="frost"] ::selection {
   background: rgba(0, 113, 227, .22);
 }
 `
 };
-var OUR_THEMES = [TOSS, NAVER, APPLE];
+var OUR_THEMES = [TIDE, MINT, FROST];
 
 // src/theme-gallery.tsx
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
@@ -567,7 +645,7 @@ var DASHBOARD_PATH = "/hermes-ui-dashboard";
 var plugin_default = {
   id: ID,
   name: "Hermes UI Collection",
-  description: "Toss / Naver / Apple \uD14C\uB9C8\uB97C \uC81C\uACF5\uD558\uB294 \uB370\uC2A4\uD06C\uD1B1 UI \uD50C\uB7EC\uADF8\uC778.",
+  description: "Tide / Mint / Frost \uD14C\uB9C8\uB97C \uC81C\uACF5\uD558\uB294 \uB370\uC2A4\uD06C\uD1B1 UI \uD50C\uB7EC\uADF8\uC778.",
   defaultEnabled: true,
   register(ctx) {
     return ctx.registerMany([

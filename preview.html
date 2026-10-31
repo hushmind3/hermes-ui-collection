@@ -16,7 +16,7 @@
     --btn-hover: inset 0 1px 0 rgba(255,255,255,.36), 0 8px 20px rgba(49,130,246,.30);
     --radius:16px; --card-radius:20px; --font:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;
   }
-  body[data-theme="naver"]{
+  body[data-theme="mint"]{
     --bg:#FFFFFF; --card:#FFFFFF; --card2:#FAFEFB; --text:#2E2E2E; --sub:#555558;
     --primary:#03C75A; --primary2:#03A94D; --primary-text:#FFFFFF;
     --secondary:#E6F9EE; --secondary-text:#03A94D;
@@ -27,7 +27,7 @@
     --btn-hover: inset 0 1px 0 rgba(255,255,255,.36), 0 10px 28px rgba(3,199,90,.34);
     --radius:14px; --card-radius:16px;
   }
-  body[data-theme="apple"]{
+  body[data-theme="frost"]{
     --bg:#F5F5F7; --card:#FFFFFF; --card2:#FBFBFD; --text:#1D1D1F; --sub:#6E6E73;
     --primary:#0071E3; --primary2:#0A84FF; --primary-text:#FFFFFF;
     --secondary:#E8E8ED; --secondary-text:#1D1D1F;
@@ -62,7 +62,7 @@
   .themes button.active{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.08)}
   .card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;box-shadow:var(--shadow-card);transition:transform .18s ease,box-shadow .18s ease}
   .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-  body[data-theme="apple"] .card{background:color-mix(in srgb,var(--card) 74%,transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%)}
+  body[data-theme="frost"] .card{background:color-mix(in srgb,var(--card) 74%,transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%)}
   .grid{display:grid;gap:16px}
   .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .g2{grid-template-columns:1.25fr .75fr}
@@ -71,8 +71,8 @@
   .big{margin-top:8px;font-size:28px;font-weight:800;letter-spacing:-.03em}
   .up{color:#F04452;font-weight:700;font-size:12px}
   .down{color:#3182F6;font-weight:700;font-size:12px}
-  body[data-theme="naver"] .up{color:#03A94D}
-  body[data-theme="apple"] .up{color:#FF3B30}
+  body[data-theme="mint"] .up{color:#03A94D}
+  body[data-theme="frost"] .up{color:#FF3B30}
   .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .btn{border:0;border-radius:var(--radius);padding:11px 16px;font:inherit;font-weight:700;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease,background-color .16s ease}
   .btn-primary{background:var(--primary);color:var(--primary-text);box-shadow:var(--btn-shadow);position:relative;overflow:hidden}
@@ -130,9 +130,9 @@
           <p class="lead">백엔드는 그대로, 표면 질감과 인터랙션만 바꿉니다.</p>
         </div>
         <div class="themes">
-          <button data-set="toss" class="active">Toss</button>
-          <button data-set="naver">Naver</button>
-          <button data-set="apple">Apple</button>
+          <button data-set="tide" class="active">Tide</button>
+          <button data-set="mint">Mint</button>
+          <button data-set="frost">Frost</button>
         </div>
       </div>
 

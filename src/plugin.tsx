@@ -11,7 +11,7 @@ const DASHBOARD_PATH = '/hermes-ui-dashboard'
 export default {
   id: ID,
   name: 'Hermes UI Collection',
-  description: 'Toss / Naver / Apple 테마를 제공하는 데스크톱 UI 플러그인.',
+  description: 'Tide / Mint / Frost 테마를 제공하는 데스크톱 UI 플러그인.',
   defaultEnabled: true,
 
   register(ctx: any) {
