@@ -1,0 +1,17 @@
+{
+  "name": "hermes-ui-collection",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Toss / Naver / Apple themes for Hermes Desktop.",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^6.0.3"
+  }
+}
